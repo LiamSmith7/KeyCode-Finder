@@ -15,7 +15,12 @@ let mainMovement = anime({
 });
 mainMovement.pause();
 
+let debounce = false;
 document.addEventListener("keydown", (keyObject) => {
+
+    
+    if(debounce) return;
+    debounce = true;
 
     // Shows everything except the mobile message on keydown
     for(let element of document.body.getElementsByTagName("div")){ 
@@ -41,15 +46,16 @@ document.addEventListener("keydown", (keyObject) => {
 
     anime({
         targets: keyMain,
-        innerText: [0, which],
+        innerHTML: which,
         easing: "linear",
-        duration: 500,
+        duration: 550,
         round: true,
         update: function(a) {
             keyMain.innerHTML = a.animations[0].currentValue;
+        },
+        complete: function() {
+            debounce = false;
         }
     });
 
-    //anime(mainTextChange);
 });
-
