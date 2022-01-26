@@ -16,6 +16,7 @@ let mainMovement = anime({
 mainMovement.pause();
 
 let debounce = false;
+let old = 0;
 document.addEventListener("keydown", (keyObject) => {
 
     
@@ -46,7 +47,7 @@ document.addEventListener("keydown", (keyObject) => {
 
     anime({
         targets: keyMain,
-        innerHTML: which,
+        innerHTML: [old, which],
         easing: "linear",
         duration: 550,
         round: true,
@@ -58,4 +59,5 @@ document.addEventListener("keydown", (keyObject) => {
         }
     });
 
+    old = which;
 });
